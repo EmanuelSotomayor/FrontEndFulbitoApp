@@ -1,0 +1,38 @@
+/*Declaración de variables CSS*/
+:root{
+    --color-fondo-formulario:#FFFFFF;
+    --color-tarjeta-degradado:;
+    --color-texto-primario:#6934E1;
+    --color-texto-secundario:#707070;
+    --fuente-titulo:aAntaraDistance;
+    --fuente-botones-formulario:#FFFFFF;
+}
+
+/*El selector font-face permite importar una fuente local y crearle un nombre*/
+@font-face{
+    src:url(/css/fonts/aAntaraDistance.ttf);
+    font-family: 'aAntaraDistance';
+}
+
+html{
+    overflow: hidden;
+    background: url(/css/SVG/background.svg);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+section > header > h1{
+    color: var(--color-texto-primario);
+    font-family: var(--fuente-titulo);
+}
+
+.form-content{
+    width: 600px;
+    background-color: white;
+    height: 700px;
+    /*Box shadow: El primer valor es el eje Y, el segundo eje X y el tercer valor es el blur/difuminado*/
+    box-shadow: 2px 3px 5px black;
+    margin: auto;
+}
