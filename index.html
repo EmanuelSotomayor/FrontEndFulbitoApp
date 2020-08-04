@@ -13,26 +13,45 @@
         <meta name="description" content="Formulario de la aplicación web"/>
     </head>
     <body>
-        <main>
-            <!--Formulario-->
+        <main class="content">
+            <!--Contenedor secundario del formulario-->
             <section class="form-sub-content">
-                
+                    <img src="css/SVG/Logo-form.svg" alt="Archivo no cargado"/>
             </section>
+            <!--Contenedor principal del formulario-->
             <section class="form-content">
                 <header class="form-header">
+                
                     <h1>Fulbito</h1>
-                        <div class="form-symbols">
+                        <!--<div class="form-symbols">
                             <img src="css/SVG/Symbols.svg" alt="Archivo no cargado"/>
-                        </div>
+                        </div>-->
                         <div class="form-player">
                             <img src="css/SVG/Render-player.svg" alt="Archivo no cargado"/>
                         </div>
+
+                        <div class="titulo-item">
+                            <h1>¡Bienvenido!</h1>    
+                        </div>
+
+                        <div class="subtitulo-item">
+                            <h2>Inicia sesion para continuar</h2>
+                        </div>
+                        <form class= "form-struct" action="" method="">
+                            <div class="inputUser">
+                                <i class="fas fa-user"></i>
+                                <input type="email" name="correo" placeholder="Usuario o correo electronico" required/>
+                            </div>
+
+                            <div class="inputPassword">
+                                <i class="fas fa-eye"></i>
+                                <input type="password" name="contraseña" placeholder="Contraseña" required/>
+                            </div>
+
+                            <input type="submit" name="Enviar" value="Iniciar sesión" required/>
+                        </form>
+                    <strong>¿Todavía no tienes una cuenta? <a id="registro" href="#">¡Registrate ahora!</a></strong>
                 </header>
-                    <form action="" method="">
-                        <input id="correo" type="email" name="correo" placeholder="Usuario o correo electronico" required/>
-                        <input id="contraseña" type="password" name="contraseña" placeholder="Contraseña" required/>
-                        <input id="enviar" type="submit" name="Enviar" value="Iniciar sesión" required/>
-                    </form>
             </section>
         </main>
     </body>
