@@ -33,6 +33,15 @@
         <script>
 
         var stompClient = null;
+
+        class Mensaje {
+            constructor(usuario, texto){
+                this.id;
+                this.usuario = usuario;
+                this.texto = texto;
+            } 
+        }   
+
                         
         function setConnected(connected) {
             document.getElementById('conectarSesion').disabled = connected;
@@ -49,13 +58,13 @@
             stompClient = Stomp.over(socket);
 
             stompClient.connect({}, function(frame) {
-                    setConnected(true);
-                    console.log('Connected: ' + frame);
-                    // ver @SendTo
-                    stompClient.subscribe('/chat/mensaje', function(mensajeAEnviar) {
-                        mostrarMensajeEnviado(JSON.parse(mensajeAEnviar.body));
-                    });
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                // ver @SendTo
+                stompClient.subscribe('/chat/mensaje', function(obtenerHistorial) {
+                    //obtenerHistorial();
                 });
+            });
 
         }
 
@@ -68,30 +77,42 @@
         }
         
         function enviarMensaje() {
+
             var usuario = document.getElementById('from').value;
             var texto = document.getElementById('text').value;
+
+            const mensaje = new Mensaje(usuario, texto);
+
             stompClient.send("/app/mensaje", {}, 
-                JSON.stringify({'usuario':usuario, 'texto':texto}));
+                JSON.stringify({'usuario': mensaje.usuario, 'texto': mensaje.texto}));
         }
         
-        function mostrarMensajeEnviado(mensajeAEnviar) {
+        // TO-DO: traer historial (por ahora no llama ni a esta funcion)
+        function obtenerHistorial() {
+
+            // capturar el html donde se mostrara el historial
             var response = document.getElementById('response');
             var p = document.createElement('p');
             p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(mensajeAEnviar.from + ": " 
-                + mensajeAEnviar.text + " (" + mensajeAEnviar.time + ")"));
-            response.appendChild(p);
-        }
-/*
-        function enviarMensaje(){
-            // hasta aca anda
-            var mensaje = {
-                texto: 'test',
-                fecha: ''
-            };
-            stompClient.send("/app/mensaje", {}, JSON.stringify(mensaje));
-        }*/
 
+            // subscribirse al historial (necesita ser recargado constantemente)
+
+                stompClient.subscribe('/chat/historial', e => {
+
+                    const historial = JSON.parse(e.body);
+                    console.log('suscripto a historial');
+                    console.log(`listando historial: ${historial}`);
+                    /*
+                    this.mensaje = historial.map(m => {
+                        return m;
+                        // añadirlo al html
+                        //p.appendChild(document.createTextNode(JSON.stringify({'usuario':usuario, 'texto':texto})));
+                        response.appendChild(p);
+                    })*/
+                    response.appendChild();
+                });
+            
+        }
 
 
         </script>
